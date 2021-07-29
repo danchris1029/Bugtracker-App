@@ -1,0 +1,26 @@
+{
+  "name": "bugtracker2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "full-install": "concurrently \"npm install\" \"cd ./client && npm install\"",
+    "client": "cd ./client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'red,green' \"npx nodemon server.js\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-openid-connect": "^2.5.0",
+    "http-proxy-middleware": "^2.0.1",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0"
+  }
+}
