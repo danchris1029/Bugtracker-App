@@ -1,2 +1,5 @@
-Set up herokuapp with app
+Fix herokuapp
+
 Erase any trace of berry's signiture on the website
+
+Make form static and not movable.

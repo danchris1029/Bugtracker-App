@@ -21,15 +21,8 @@ mongoose.connect(MONGODB_URI, {
 });
 
 mongoose.connection.on('connected', () => {
-    // if (err) throw err;
+
     console.log("connected");
-    // var dbo = db.db("mydb");
-    // var myobj = { name: "Toilet is clogged", priority: "highest"};
-    // dbo.collection("Issues").findOne({}, function(err, res){
-    //     if (err) throw err;
-    //     // console.log(res);
-    //     db.close();
-    // });
 })
 
 router.post('/save', (req, res) =>{
@@ -110,5 +103,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 // app.use(cors());
 app.use("/api", router);
+
+// if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+// }
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`))
