@@ -5,6 +5,7 @@ const cors = require('cors');
 const proxy = require('http-proxy-middleware');
 const { auth } = require('express-openid-connect');
 const { requiresAuth } = require('express-openid-connect');
+const path = require('path');
 
 const Issues = require('./models/issues');
 
@@ -48,6 +49,13 @@ router.post('/save', (req, res) =>{
         }); 
     });
 });
+
+
+//Causes issue with API but fixes routing?
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
+
 
 router.get("/", (req, res) => {
     Issues.find({})
@@ -107,5 +115,6 @@ app.use("/api", router);
 // if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
 // }
+
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`))
