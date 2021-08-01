@@ -1,8 +1,8 @@
 {
-    "name": "berry-material-react-free",
+    "name": "hurt-bugs-tracker",
     "version": "1.0.0",
     "private": true,
-    "homepage": "https://berrydashboard.io/",
+    "homepage": "https://hurt-bugs-tracker.herokuapp.com/",
     "dependencies": {
         "@emotion/react": "^11.1.5",
         "@emotion/styled": "^11.3.0",

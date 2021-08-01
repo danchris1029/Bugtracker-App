@@ -1,5 +1,9 @@
-Fix herokuapp
-
 Erase any trace of berry's signiture on the website
 
 Make form static and not movable.
+
+Get database to work with heroku app
+
+implement error Boundary
+
+Clean up  server.js
