@@ -1,5 +1,5 @@
 import React, {lazy} from 'react';
-import {Route, Switch, useLocation} from 'react-router-dom';
+import {Route, Switch, useLocation, BrowserRouter, HashRouter} from 'react-router-dom';
 
 import MainLayout from './../layout/MainLayout';
 
@@ -44,24 +44,26 @@ const MainRoutes = () => {
             ]}
         >
             <MainLayout showBreadcrumb={true}>
-                <Switch  key={location.pathname}>
-                        <Route path="/dashboard/default" component={DashboardDefault} />
+                <BrowserRouter>
+                    <Switch  key={location.pathname}>
+                            <Route path="/dashboard/default" component={DashboardDefault} />
 
-                        <Route path="/issues" component={Issues} />
-                        <Route path="/issue_report" component={ReportIssues} />
+                            <Route path="/issues" component={Issues} />
+                            <Route path="/issue_report" component={ReportIssues} />
 
-                        <Route path="/tables/tbl-basic" component={TableBasic} />
-                        <Route path="/tables/tbl-dense" component={TableDense} />
+                            <Route path="/tables/tbl-basic" component={TableBasic} />
+                            <Route path="/tables/tbl-dense" component={TableDense} />
 
-                        <Route path="/utils/util-typography" component={UtilsTypography} />
-                        <Route path="/utils/util-color" component={UtilsColor} />
-                        <Route path="/utils/util-shadow" component={UtilsShadow} />
-                        <Route path="/icons/tabler-icons" component={UtilsTablerIcons} />
-                        <Route path="/icons/material-icons" component={UtilsMaterialIcons} />
+                            <Route path="/utils/util-typography" component={UtilsTypography} />
+                            <Route path="/utils/util-color" component={UtilsColor} />
+                            <Route path="/utils/util-shadow" component={UtilsShadow} />
+                            <Route path="/icons/tabler-icons" component={UtilsTablerIcons} />
+                            <Route path="/icons/material-icons" component={UtilsMaterialIcons} />
 
-                        <Route path="/sample-page" component={SamplePage} />
+                            <Route path="/sample-page" component={SamplePage} />
 
-                </Switch>
+                    </Switch>
+                </BrowserRouter>
             </MainLayout>
         </Route>
     );
