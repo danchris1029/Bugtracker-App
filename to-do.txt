@@ -1,8 +1,13 @@
+Get database to work with heroku app
+	- Heroku app sends url to server and not client
+	- static.json will not work
+
+
 Erase any trace of berry's signiture on the website
 
 Make form static and not movable.
 
-Get database to work with heroku app
+
 
 implement error Boundary
 

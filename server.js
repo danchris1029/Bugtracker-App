@@ -52,9 +52,12 @@ router.post('/save', (req, res) =>{
 
 
 //Causes issue with API but fixes routing?
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/client/build/index.html'));
+//     console.log(path.join(__dirname, '/client/build/index.html'));
+// });
+
+app.use(express.static(path.join(__dirname, 'client')));
 
 
 router.get("/", (req, res) => {
