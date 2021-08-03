@@ -57,12 +57,12 @@ router.post('/save', (req, res) =>{
 //     console.log(path.join(__dirname, '/client/build/index.html'));
 // });
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+// app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-    console.log(path.join(__dirname, '/client/build/index.html'));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/client/build/index.html'));
+//     console.log(path.join(__dirname, '/client/build/index.html'));
+// });
 
 router.get("/", (req, res) => {
     Issues.find({})
@@ -100,17 +100,17 @@ const config = {
     issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// // auth router attaches /login, /logout, and /callback routes to the baseURL
+// app.use(auth(config));
 
-// req.isAuthenticated is provided from the auth router
-app.get('/api/login', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+// // req.isAuthenticated is provided from the auth router
+// app.get('/api/login', (req, res) => {
+//     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+// });
 
-app.get('/api/profile', requiresAuth(), (req, res) => {
-    res.send(JSON.stringify(req.oidc.user));
-});
+// app.get('/api/profile', requiresAuth(), (req, res) => {
+//     res.send(JSON.stringify(req.oidc.user));
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -119,9 +119,9 @@ app.use(morgan('tiny'));
 // app.use(cors());
 app.use("/api", router);
 
-// if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build'));
-// }
+// // if(process.env.NODE_ENV === 'production'){
+//     app.use(express.static('client/build'));
+// // }
 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`))

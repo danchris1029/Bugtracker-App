@@ -44,7 +44,6 @@ const MainRoutes = () => {
             ]}
         >
             <MainLayout showBreadcrumb={true}>
-                <BrowserRouter>
                     <Switch  key={location.pathname}>
                             <Route path="/dashboard/default" component={DashboardDefault} />
 
@@ -63,7 +62,6 @@ const MainRoutes = () => {
                             <Route path="/sample-page" component={SamplePage} />
 
                     </Switch>
-                </BrowserRouter>
             </MainLayout>
         </Route>
     );
