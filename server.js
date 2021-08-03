@@ -8,6 +8,7 @@ const { requiresAuth } = require('express-openid-connect');
 const path = require('path');
 
 const Issues = require('./models/issues');
+const { nextTick } = require('process');
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -57,14 +58,10 @@ router.post('/save', (req, res) =>{
 //     console.log(path.join(__dirname, '/client/build/index.html'));
 // });
 
-// app.use(express.static(path.join(__dirname, 'client/build')));
 
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/client/build/index.html'));
-//     console.log(path.join(__dirname, '/client/build/index.html'));
-// });
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-router.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     Issues.find({})
         .then((data) =>{
             //console.log('Data: ', data);
@@ -90,15 +87,19 @@ router.post("/remove", (req, res) => {
         });
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+    console.log(path.join(__dirname, '/client/build/index.html'));
+});
 
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000',
-    clientID: 'VwGsxJrBdA0k9nzTa604ow8DbAMNO8Ri',
-    issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
-};
+// const config = {
+//     authRequired: false,
+//     auth0Logout: true,
+//     secret: 'a long, randomly-generated string stored in env',
+//     baseURL: 'http://localhost:3000',
+//     clientID: 'VwGsxJrBdA0k9nzTa604ow8DbAMNO8Ri',
+//     issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
+// };
 
 // // auth router attaches /login, /logout, and /callback routes to the baseURL
 // app.use(auth(config));
@@ -120,7 +121,8 @@ app.use(morgan('tiny'));
 app.use("/api", router);
 
 // // if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static('client/build'));
+     //app.use(express.static('client/build'));
+     //app.use(express.static(path.join(__dirname, 'client/build')));
 // // }
 
 
