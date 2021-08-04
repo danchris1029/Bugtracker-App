@@ -17,7 +17,7 @@ const router = express.Router();
 
 const MONGODB_URI = 'mongodb+srv://user:MerryChristmas@cluster0.6ry3g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
