@@ -23,7 +23,6 @@ mongoose.connect(MONGODB_URI, {
 });
 
 mongoose.connection.on('connected', () => {
-
     console.log("connected");
 })
 
@@ -112,6 +111,8 @@ app.get('*', (req, res) => {
 // app.get('/api/profile', requiresAuth(), (req, res) => {
 //     res.send(JSON.stringify(req.oidc.user));
 // });
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
