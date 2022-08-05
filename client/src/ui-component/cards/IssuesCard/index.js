@@ -167,7 +167,7 @@ const IssuesCard = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Typography className={classes.subHeading}>Number of issues{props.issues_s}</Typography>
+                        <Typography className={classes.subHeading}>Number of issues {props.issues_s}</Typography>
                     </Grid>
                 </Grid>
             </CardContent>

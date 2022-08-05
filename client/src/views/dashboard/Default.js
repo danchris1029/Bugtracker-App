@@ -68,7 +68,7 @@ const Dashboard = () => {
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
                         <IssuesCard issues_s={issue_size}></IssuesCard>
-                        {issue_size} 
+                        {/* {issue_size}  */}
                     </Grid>
                     {/* <Grid item lg={4} md={6} sm={6} xs={12}>
                         <TotalChartCard />

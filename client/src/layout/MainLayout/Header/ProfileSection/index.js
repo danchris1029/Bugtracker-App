@@ -197,10 +197,10 @@ const ProfileSection = () => {
                                                     Kishan
                                                 </Typography>
                                             </Grid>
-                                            <Grid item>
+                                            {/* <Grid item>
                                                 <a class="btn" href="/issue_report">Report Issue</a>
                                                 <Typography variant="subtitle2">Project Admin</Typography>
-                                            </Grid>
+                                            </Grid> */}
                                         </Grid>
                                         <OutlinedInput
                                             className={classes.searchControl}
@@ -221,9 +221,9 @@ const ProfileSection = () => {
                                         />
                                         <Divider />
                                         <PerfectScrollbar className={classes.ScrollHeight}>
-                                            <UpgradePlanCard />
+                                            {/* <UpgradePlanCard /> */}
                                             <Divider />
-                                            <Card className={classes.card}>
+                                            {/* <Card className={classes.card}>
                                                 <CardContent>
                                                     <Grid container spacing={3} direction="column">
                                                         <Grid item>
@@ -259,7 +259,7 @@ const ProfileSection = () => {
                                                         </Grid>
                                                     </Grid>
                                                 </CardContent>
-                                            </Card>
+                                            </Card> */}
                                             <Divider />
                                             <List component="nav" className={classes.navContainer}>
                                                 {/* <ListItem
