@@ -7,13 +7,13 @@ const { auth } = require('express-openid-connect');
 const { requiresAuth } = require('express-openid-connect');
 const path = require('path');
 
+const router = require('./routes');
+
 const Issues = require('./models/issues');
 const { nextTick } = require('process');
 
 var app = express();
 var PORT = process.env.PORT || 8080;
-
-const router = express.Router();
 
 const MONGODB_URI = 'mongodb+srv://user:MerryChristmas@cluster0.6ry3g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
@@ -25,31 +25,6 @@ mongoose.connect(process.env.MONGODB_URI || MONGODB_URI, {
 mongoose.connection.on('connected', () => {
     console.log("connected");
 })
-
-router.post('/save', (req, res) =>{
-    console.log('Body: ', req.body);
-    const data = req.body;
-    // const data = {
-    //     name: "test",
-    //     priority: "priority"
-    // };
-
-    const newIssues = new Issues(data);
-
-    // save
-
-    newIssues.save((error) => {
-        if(error){
-            res.status(500).json({ msg: 'Sorry, internal server errors'});
-            return;
-        }
-        // Issues
-        return res.json({
-            msg: 'Your data has been saved!'
-        }); 
-    });
-});
-
 
 //Causes issue with API but fixes routing?
 // app.get('*', (req, res) => {
@@ -74,39 +49,28 @@ app.get("/api", (req, res) => {
         });
 });
 
-router.post("/remove", (req, res) => {
-    console.log(req.body)
-    Issues.findOneAndDelete({_id: req.body.id})
-        .then((data) =>{
-            console.log('Data: ', data);
-            res.json(data);
-        })
-        .catch((error) =>{
-            console.log('error: ', error);
-        });
+// req.isAuthenticated is provided from the auth router
+app.get('/api/login', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+    console.log('joined');
 });
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
-    console.log(path.join(__dirname, '/client/build/index.html'));
+    //console.log(path.join(__dirname, '/client/build/index.html'));
 });
 
-// const config = {
-//     authRequired: false,
-//     auth0Logout: true,
-//     secret: 'a long, randomly-generated string stored in env',
-//     baseURL: 'http://localhost:3000',
-//     clientID: 'VwGsxJrBdA0k9nzTa604ow8DbAMNO8Ri',
-//     issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
-// };
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: 'a long, randomly-generated string stored in env',
+    baseURL: 'http://localhost:8080',
+    clientID: 'VwGsxJrBdA0k9nzTa604ow8DbAMNO8Ri',
+    issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
+};
 
-// // auth router attaches /login, /logout, and /callback routes to the baseURL
-// app.use(auth(config));
-
-// // req.isAuthenticated is provided from the auth router
-// app.get('/api/login', (req, res) => {
-//     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-// });
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 
 // app.get('/api/profile', requiresAuth(), (req, res) => {
 //     res.send(JSON.stringify(req.oidc.user));
