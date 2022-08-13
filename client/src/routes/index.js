@@ -21,7 +21,7 @@ const Routes = () => {
                         <AuthenticationRoutes />
 
                         {/* Route for login */}
-                        <LoginRoutes />
+                        {/* <LoginRoutes /> */}
 
                         {/* Routes for main layouts */}
                         <MainRoutes />

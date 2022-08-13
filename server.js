@@ -33,8 +33,6 @@ mongoose.connection.on('connected', () => {
 // });
 
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
 app.get("/api", (req, res) => {
     Issues.find({})
         .then((data) =>{
@@ -49,41 +47,42 @@ app.get("/api", (req, res) => {
         });
 });
 
+const config = {
+    authRequired: true,
+    auth0Logout: true,
+    secret: 'a long, randomly-generated string stored in env',
+    baseURL: 'http://localhost:8080/',
+    clientID: 'uMfHUrQdS2w2TR9zOJ4yYc7RPYnyzKbD',
+    issuerBaseURL: 'https://dev-qet2fkt5.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
 // req.isAuthenticated is provided from the auth router
 app.get('/api/login', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
     console.log('joined');
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-    //console.log(path.join(__dirname, '/client/build/index.html'));
-});
-
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:8080',
-    clientID: 'VwGsxJrBdA0k9nzTa604ow8DbAMNO8Ri',
-    issuerBaseURL: 'https://dev-1af63l0x.us.auth0.com'
-};
-
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/client/build/index.html'));
+//     //console.log(path.join(__dirname, '/client/build/index.html'));
+// });
 
 // app.get('/api/profile', requiresAuth(), (req, res) => {
 //     res.send(JSON.stringify(req.oidc.user));
 // });
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(express.static('client/build'));
 app.use(morgan('tiny'));
-// app.use(cors());
-app.use("/api", router);
+
+// app.use("/", router);
 
 // // if(process.env.NODE_ENV === 'production'){
      //app.use(express.static('client/build'));
