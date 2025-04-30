@@ -15,7 +15,7 @@ const { nextTick } = require('process');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-const MONGODB_URI = 'mongodb+srv://user:MerryChristmas@cluster0.6ry3g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI = '';
 
 mongoose.connect(process.env.MONGODB_URI || MONGODB_URI, {
     useNewUrlParser: true,
